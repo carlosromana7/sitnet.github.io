@@ -1,14 +1,9 @@
-// script.js
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Smooth scrolling for navigation
-    const navLinks = document.querySelectorAll('nav a, .btn-primary');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            window.scrollTo({
-                top: targetElement.offsetTop - 70,
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });
         });
@@ -19,34 +14,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         // Here you would typically send the form data to a server
-        alert('Gracias por su mensaje. Nos pondremos en contacto pronto.');
+        // For this example, we'll just show an alert
+        alert('Gracias por contactarnos. Te responderemos pronto.');
         form.reset();
     });
 
-    // Animate services on scroll
-    const animateOnScroll = (entries, observer) => {
+    // Add animation to service items on scroll
+    const serviceItems = document.querySelectorAll('.service-item');
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-                observer.unobserve(entry.target);
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
             }
         });
-    };
+    }, { threshold: 0.1 });
 
-    const observer = new IntersectionObserver(animateOnScroll, { threshold: 0.1 });
-
-    const animateElements = document.querySelectorAll('.service-item, .project-item, .cert-item');
-    animateElements.forEach(el => observer.observe(el));
-
-    // Simple testimonial slider
-    const testimonials = document.querySelectorAll('.testimonial');
-    let currentTestimonial = 0;
-
-    function showNextTestimonial() {
-        testimonials[currentTestimonial].style.display = 'none';
-        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-        testimonials[currentTestimonial].style.display = 'block';
-    }
-
-    setInterval(showNextTestimonial, 5000); // Change testimonial every 5 seconds
+    serviceItems.forEach(item => {
+        item.style.opacity = 0;
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(item);
+    });
 });
