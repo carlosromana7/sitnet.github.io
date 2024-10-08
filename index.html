@@ -4,90 +4,423 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITNET - Consultoría de TI y Seguridad Informática</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos CSS */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --text-color: #333;
+            --bg-color: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--secondary-color);
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: var(--primary-color) 3px solid;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        header li {
+            display: inline;
+            padding: 0 20px;
+        }
+
+        header #branding {
+            float: left;
+        }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        header .highlight, header .current a {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        header a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Showcase */
+        #showcase {
+            min-height: 100vh;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #showcase h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        #showcase p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 30px;
+            background: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #2980b9;
+        }
+
+        /* Services */
+        #services {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        #services h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--secondary-color);
+        }
+
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .service-item {
+            flex-basis: calc(25% - 20px);
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .service-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        /* Certifications */
+        #certifications {
+            padding: 80px 0;
+            background: var(--secondary-color);
+            color: #fff;
+            text-align: center;
+        }
+
+        #certifications h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .cert-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cert-item {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cert-item:hover {
+            transform: scale(1.1);
+        }
+
+        /* Contact */
+        #contact {
+            padding: 80px 0;
+        }
+
+        #contact h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--secondary-color);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            header #branding,
+            header nav,
+            header nav li {
+                float: none;
+                text-align: center;
+                width: 100%;
+            }
+
+            header {
+                padding-bottom: 20px;
+            }
+
+            .service-item {
+                flex-basis: calc(50% - 20px);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-left {
+            animation: 1s ease-out 0s 1 slideInFromLeft;
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-right {
+            animation: 1s ease-out 0s 1 slideInFromRight;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">SITNET</div>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#certificaciones">Certificaciones</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">SIT</span>NET</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="#showcase">Inicio</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#certifications">Certificaciones</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section id="inicio" class="hero">
-            <h1>Bienvenido a SITNET</h1>
-            <p>Soluciones integrales en tecnología de la información y seguridad informática</p>
-            <a href="#contacto" class="cta-button">Contáctanos</a>
-        </section>
+    <section id="showcase">
+        <div class="container">
+            <h1 class="fade-in">Bienvenido a SITNET</h1>
+            <p class="fade-in">Soluciones integrales en tecnología de la información y seguridad informática</p>
+            <a href="#contact" class="button">Contáctanos</a>
+        </div>
+    </section>
 
-        <section id="servicios">
-            <h2>Nuestros Servicios</h2>
-            <div class="services-grid">
-                <div class="service-item">
+    <section id="services">
+        <div class="container">
+            <h2 class="slide-in-left">Nuestros Servicios</h2>
+            <div class="services-container">
+                <div class="service-item fade-in">
                     <h3>Cableado de Red de Datos</h3>
                     <p>Instalación y configuración de redes de datos eficientes y seguras.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item fade-in">
                     <h3>CCTV IP</h3>
                     <p>Sistemas de videovigilancia IP de última generación.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item fade-in">
                     <h3>Diseño de Redes</h3>
                     <p>Diseño e implementación de redes LAN, WAN y WLAN.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item fade-in">
                     <h3>Gestión de Redes Empresariales</h3>
                     <p>Administración y optimización de redes corporativas.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item fade-in">
                     <h3>Monitoreo de Redes</h3>
                     <p>Servicios de monitoreo continuo para garantizar el rendimiento de su red.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item fade-in">
                     <h3>Servicios de Infraestructura</h3>
                     <p>Soluciones integrales para su infraestructura de TI.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item fade-in">
                     <h3>Radio Enlaces</h3>
                     <p>Implementación de enlaces de radio para comunicaciones de larga distancia.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item fade-in">
                     <h3>Telefonía IP</h3>
                     <p>Gestión y configuración de sistemas de telefonía IP.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="certificaciones">
-            <h2>Nuestras Certificaciones</h2>
-            <div class="certifications">
+    <section id="certifications">
+        <div class="container">
+            <h2 class="slide-in-right">Nuestras Certificaciones</h2>
+            <div class="cert-container">
                 <div class="cert-item">CCNA</div>
                 <div class="cert-item">CCNP</div>
                 <div class="cert-item">NSE4</div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contacto">
-            <h2>Contáctanos</h2>
-            <form id="contact-form">
-                <input type="text" name="nombre" placeholder="Nombre" required>
+    <section id="contact">
+        <div class="container">
+            <h2 class="slide-in-left">Contáctanos</h2>
+            <form class="contact-form">
+                <input type="text" name="name" placeholder="Nombre" required>
                 <input type="email" name="email" placeholder="Email" required>
-                <textarea name="mensaje" placeholder="Mensaje" required></textarea>
-                <button type="submit">Enviar</button>
+                <textarea name="message" placeholder="Mensaje" required></textarea>
+                <button type="submit" class="button">Enviar</button>
             </form>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <footer>
         <p>&copy; 2023 SITNET. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // JavaScript para manejar el envío del formulario
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Gracias por contactarnos. Te responderemos pronto.');
+            this.reset();
+        });
+
+        // JavaScript para la animación de aparición de elementos al hacer scroll
+        function isElementInViewport(el) {
+            var rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScroll() {
+            var elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+            elements.forEach(function(element) {
+                if (isElementInViewport(element)) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateX(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('load', handleScroll);
+
+        // Smooth scrolling para los enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
